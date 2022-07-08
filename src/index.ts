@@ -2,6 +2,7 @@ import Express, { Request, Response } from "express";
 import * as Ethers from "ethers";
 
 const PORT = process.env.PORT || 3000;
+const SALT = "";
 const DEFAULT_WALLET_STORE_PATH = "/../temp/wallets/";
 const app = Express();
  
