@@ -42,6 +42,16 @@ async function storeWallet(walletAddress: string, encryptedWallet: string): Prom
     return isSuccess;
 };
 
+async function getWallet(walletAddress: string): Promise<string> {
+    const _path = __dirname + DEFAULT_WALLET_STORE_PATH + walletAddress.toLowerCase();
+    const [ isSuccess, data, err ] = await readFile(_path);
+    if (!isSuccess) {
+        throw new Error(err);
+    }
+    const encryptedWallet = JSON.parse(data);
+    return "0x" + encryptedWallet.address;
+};
+
 function writeFile(path: string, data: string): Promise<[boolean, string | null | undefined]> {
   return new Promise((resolve, reject) => {
     const _dir = path.split("/").slice(0, -1).join("/");
