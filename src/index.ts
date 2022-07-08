@@ -12,6 +12,7 @@ app.get("/healthcheck", async (req: Request, res: Response) => {
 });
 
 app.post("/user/create-wallet", hCreateWallet);
+app.get("/user/get-wallet", hGetWallet);
 
 app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
 
@@ -24,6 +25,15 @@ async function hCreateWallet(req: Request, res: Response): Promise<void> {
     const wallet_address = await createWallet();
     res.json({ message: "Wallet created", data: { wallet_address } });
 };
+
+async function hGetWallet(req: Request, res: Response): Promise<void> {
+    const walletAddress = (req.query.id as string);
+    if (!walletAddress) {
+      const _ = res.json({ message: "Wallet address not provided" });
+    }
+    const wallet = await getWallet(walletAddress);
+    res.json({ message: "Wallet found", data: { wallet } });
+}
 
 async function createWallet(): Promise<string> {
     const wallet = Ethers.Wallet.createRandom();
