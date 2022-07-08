@@ -1,5 +1,6 @@
 import Express, { Request, Response } from "express";
 import * as Ethers from "ethers";
+import * as fs from "fs";
 
 const PORT = process.env.PORT || 3000;
 const SALT = "";
