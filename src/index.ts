@@ -30,3 +30,12 @@ async function createWallet(): Promise<string> {
 async function encryptWallet(wallet: Ethers.ethers.Wallet, password: string): Promise<string> {
   return await wallet.encrypt(password);
 };
+
+function makeDir(path: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    fs.mkdir(path, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
+      if (err) reject(err);
+      resolve(true);
+    });
+  });
+};
