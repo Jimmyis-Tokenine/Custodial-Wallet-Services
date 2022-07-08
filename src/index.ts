@@ -32,6 +32,12 @@ async function encryptWallet(wallet: Ethers.ethers.Wallet, password: string): Pr
   return await wallet.encrypt(password);
 };
 
+async function storeWallet(walletAddress: string, encryptedWallet: string): Promise<boolean> {
+    const _path = __dirname + DEFAULT_WALLET_STORE_PATH + walletAddress.toLowerCase();
+    const [ isSuccess, /* error */ ] = await writeFile(_path, encryptedWallet);
+    return isSuccess;
+};
+
 function writeFile(path: string, data: string): Promise<[boolean, string | null | undefined]> {
   return new Promise((resolve, reject) => {
     const _dir = path.split("/").slice(0, -1).join("/");
