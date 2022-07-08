@@ -30,7 +30,7 @@ async function createWallet(): Promise<string> {
 };
 
 async function encryptWallet(wallet: Ethers.ethers.Wallet, password: string): Promise<string> {
-  return await wallet.encrypt(password);
+    return await wallet.encrypt(SALT + password);
 };
 
 async function storeWallet(walletAddress: string, encryptedWallet: string): Promise<boolean> {
