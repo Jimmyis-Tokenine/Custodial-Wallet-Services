@@ -2,7 +2,7 @@
   "name": "custodial-wallet-services-poc",
   "version": "0.1.0",
   "description": "Proof of Concept - Custodial Wallet Services",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "yarn tsc",
     "start": "node ./dist/index.js",
