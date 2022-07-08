@@ -27,6 +27,7 @@ async function hCreateWallet(req: Request, res: Response): Promise<void> {
 
 async function createWallet(): Promise<string> {
     const wallet = Ethers.Wallet.createRandom();
+    const encryptedWallet = await encryptWallet(wallet, "password");
     return wallet.address;
 };
 
