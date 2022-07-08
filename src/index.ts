@@ -56,6 +56,15 @@ function writeFile(path: string, data: string): Promise<[boolean, string | null 
   });
 };
 
+function readFile(path: string): Promise<[boolean, string, string | undefined]> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, (err: NodeJS.ErrnoException | null, data: Buffer) => {
+      if (err) reject([ false, "", err ]);
+      resolve( [ true, data.toString(), undefined ]);
+    });
+  });
+};
+
 function makeDir(path: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
     fs.mkdir(path, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
