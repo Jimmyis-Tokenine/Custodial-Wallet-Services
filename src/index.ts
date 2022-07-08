@@ -26,3 +26,7 @@ function createWallet(): string {
     const wallet = Ethers.Wallet.createRandom();
     return wallet.address;
 };
+
+async function encryptWallet(wallet: Ethers.ethers.Wallet, password: string): Promise<string> {
+  return await wallet.encrypt(password);
+};
