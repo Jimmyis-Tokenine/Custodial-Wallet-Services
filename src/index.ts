@@ -17,9 +17,9 @@ app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
 */
 
 // Create Wallet handler
-async function hCreateWallet(req: Request, res: Response) {
-    const wallet = await Ethers.Wallet.createRandom();
-    res.json(wallet.address);
+async function hCreateWallet(req: Request, res: Response): Promise<void> {
+    const wallet_address = createWallet();
+    res.json({ message: "Wallet created", data: { wallet_address } });
 };
 
 function createWallet(): string {
