@@ -21,3 +21,8 @@ async function hCreateWallet(req: Request, res: Response) {
     const wallet = await Ethers.Wallet.createRandom();
     res.json(wallet.address);
 };
+
+function createWallet(): string {
+    const wallet = Ethers.Wallet.createRandom();
+    return wallet.address;
+};
