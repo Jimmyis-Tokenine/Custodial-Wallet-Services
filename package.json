@@ -4,6 +4,11 @@
   "description": "Proof of Concept - Custodial Wallet Services",
   "main": "index.js",
   "scripts": {
+    "build": "yarn tsc",
+    "start": "node ./dist/index.js",
+    "dist": "tsc -p .",
+    "dev": "nodemon ./src/index.ts",
+    "type": "module",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jimmyis <me@jimmyis.com>",
