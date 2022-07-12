@@ -17,6 +17,7 @@ app.get("/healthcheck", async (req: Request, res: Response) => {
 
 app.post("/user/create-wallet", hCreateWallet);
 app.get("/user/get-wallet", hGetWallet);
+app.post("/tx", hTransactionRequest);
 
 app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
 
