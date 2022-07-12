@@ -4,8 +4,6 @@ import * as fs from "fs";
 import bodyParser from "body-parser";
 
 const PORT = process.env.PORT || 3000;
-const SALT = "";
-const DEFAULT_WALLET_STORE_PATH = "/../temp/wallets/";
 const app = Express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
