@@ -1,6 +1,5 @@
 import Express, { Request, Response } from "express";
 import * as Ethers from "ethers";
-import * as fs from "fs";
 import bodyParser from "body-parser";
 
 const PORT = process.env.PORT || 3000;
@@ -70,44 +69,3 @@ async function transactionRequestProcessor(tx: TransactionPayload): Promise<[Tra
     return [ transactionResult, false ];
 }
 
-async function getWallet(walletAddress: string): Promise<string> {
-    const _path = __dirname + DEFAULT_WALLET_STORE_PATH + walletAddress.toLowerCase();
-    const [ isSuccess, data, err ] = await readFile(_path);
-    if (!isSuccess) {
-        throw new Error(err);
-    }
-    const encryptedWallet = JSON.parse(data);
-    return "0x" + encryptedWallet.address;
-};
-
-function writeFile(path: string, data: string): Promise<[boolean, string | null | undefined]> {
-    return new Promise((resolve, reject) => {
-        const _dir = path.split("/").slice(0, -1).join("/");
-        makeDir(_dir)
-        .then((r: boolean) => {
-            fs.writeFile(path, data, (err: NodeJS.ErrnoException | null) => {
-                if (err) reject([ false, err ]);
-                resolve( [ true, null ]);
-            });
-        })
-        .catch((e: NodeJS.ErrnoException) => reject([false, e]));
-    });
-};
-
-function readFile(path: string): Promise<[boolean, string, string | undefined]> {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path, (err: NodeJS.ErrnoException | null, data: Buffer) => {
-            if (err) reject([ false, "", err ]);
-            resolve( [ true, data.toString(), undefined ]);
-        });
-    });
-};
-
-function makeDir(path: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-        fs.mkdir(path, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
-            if (err) reject(err);
-            resolve(true);
-        });
-    });
-};
