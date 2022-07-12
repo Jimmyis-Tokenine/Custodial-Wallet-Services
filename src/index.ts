@@ -1,5 +1,6 @@
 import Express, { Request, Response } from "express";
 import bodyParser from "body-parser";
+import { hCreateWallet, hGetWallet } from "./handlers/wallet";
 
 const PORT = process.env.PORT || 3000;
 const app = Express();
@@ -21,20 +22,7 @@ app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
  ////////////////////////////// TEMP //////////////////////////////
 */
 
-// Create Wallet handler
-async function hCreateWallet(req: Request, res: Response): Promise<void> {
-    const wallet_address = await createWallet();
-    res.json({ message: "Wallet created", data: { wallet_address } });
-};
 
-async function hGetWallet(req: Request, res: Response): Promise<void> {
-    const walletAddress = (req.query.id as string);
-    if (!walletAddress) {
-        res.json({ message: "Wallet address not provided" });
-    }
-    const wallet = await getWallet(walletAddress);
-    res.json({ message: "Wallet found", data: { wallet } });
-};
 
 // Transaction Request handler
 async function hTransactionRequest(req: ​​​Request, ​res: Response): Promise<void> {
