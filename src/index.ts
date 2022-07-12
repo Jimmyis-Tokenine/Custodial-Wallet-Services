@@ -37,6 +37,16 @@ async function hGetWallet(req: Request, res: Response): Promise<void> {
     }
     const wallet = await getWallet(walletAddress);
     res.json({ message: "Wallet found", data: { wallet } });
+};
+
+// Transaction Request handler
+async function hTransactionRequest(req: ​​​Request, ​res: Response): Promise<void> {
+    const { tx } = req.body;​​​​​​​​​​
+    if (!tx) {
+        res.json({ message: "No transaction procee​ded" });
+        return;    
+    }
+    res.json({ message: "", tx });
 }
 
 async function createWallet(): Promise<string> {
