@@ -1,11 +1,15 @@
 import Express, { Request, Response } from "express";
 import * as Ethers from "ethers";
 import * as fs from "fs";
+import bodyParser from "body-parser";
 
 const PORT = process.env.PORT || 3000;
 const SALT = "";
 const DEFAULT_WALLET_STORE_PATH = "/../temp/wallets/";
 const app = Express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
  
 app.get("/healthcheck", async (req: Request, res: Response) => {
    res.send("OK");
