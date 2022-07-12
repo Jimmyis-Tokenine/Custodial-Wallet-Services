@@ -67,6 +67,11 @@ async function storeWallet(walletAddress: string, encryptedWallet: string): Prom
     return isSuccess;
 };
 
+async function transactionRequestProcessor(tx: TransactionPayload): Promise<[TransactionResult, boolean]> {
+    const transactionResult = {};
+    return [ transactionResult, false ];
+}
+
 async function getWallet(walletAddress: string): Promise<string> {
     const _path = __dirname + DEFAULT_WALLET_STORE_PATH + walletAddress.toLowerCase();
     const [ isSuccess, data, err ] = await readFile(_path);
