@@ -18,19 +18,3 @@ app.get("/user/get-wallet", hGetWallet);
 app.post("/tx", hTransactionRequest);
 
 app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
-
-/* 
- ////////////////////////////// TEMP //////////////////////////////
-*/
-
-
-
-
-
-
-
-async function transactionRequestProcessor(tx: TransactionPayload): Promise<[TransactionResult, boolean]> {
-    const transactionResult = {};
-    return [ transactionResult, false ];
-}
-
