@@ -7,3 +7,7 @@ export interface Credential {
 export interface TransactionPayload {
 
 };
+
+export interface TransactionResult {
+    
+};
