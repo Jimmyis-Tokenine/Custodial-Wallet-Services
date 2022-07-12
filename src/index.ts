@@ -1,6 +1,7 @@
 import Express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { hCreateWallet, hGetWallet } from "./handlers/wallet";
+import { hTransactionRequest } from "./handlers/transaction";
 
 const PORT = process.env.PORT || 3000;
 const app = Express();
@@ -24,15 +25,6 @@ app.listen(PORT, (): void => console.log(`App is listening at port ${PORT}`));
 
 
 
-// Transaction Request handler
-async function hTransactionRequest(req: ​​​Request, ​res: Response): Promise<void> {
-    const { tx } = req.body;​​​​​​​​​​
-    if (!tx) {
-        res.json({ message: "No transaction procee​ded" });
-        return;    
-    }
-    res.json({ message: "", tx });
-}
 
 
 
