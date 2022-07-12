@@ -1,5 +1,4 @@
 import Express, { Request, Response } from "express";
-import * as Ethers from "ethers";
 import bodyParser from "body-parser";
 
 const PORT = process.env.PORT || 3000;
@@ -47,22 +46,8 @@ async function hTransactionRequest(req: ​​​Request, ​res: Response): Pro
     res.json({ message: "", tx });
 }
 
-async function createWallet(): Promise<string> {
-    const wallet = Ethers.Wallet.createRandom();
-    const encryptedWallet = await encryptWallet(wallet, "password");
-    const isSuccess = await storeWallet(wallet.address, encryptedWallet);
-    return wallet.address;
-};
 
-async function encryptWallet(wallet: Ethers.ethers.Wallet, password: string): Promise<string> {
-    return await wallet.encrypt(SALT + password);
-};
 
-async function storeWallet(walletAddress: string, encryptedWallet: string): Promise<boolean> {
-    const _path = __dirname + DEFAULT_WALLET_STORE_PATH + walletAddress.toLowerCase();
-    const [ isSuccess, /* error */ ] = await writeFile(_path, encryptedWallet);
-    return isSuccess;
-};
 
 async function transactionRequestProcessor(tx: TransactionPayload): Promise<[TransactionResult, boolean]> {
     const transactionResult = {};
