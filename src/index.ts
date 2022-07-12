@@ -29,7 +29,7 @@ async function hCreateWallet(req: Request, res: Response): Promise<void> {
 async function hGetWallet(req: Request, res: Response): Promise<void> {
     const walletAddress = (req.query.id as string);
     if (!walletAddress) {
-      const _ = res.json({ message: "Wallet address not provided" });
+        res.json({ message: "Wallet address not provided" });
     }
     const wallet = await getWallet(walletAddress);
     res.json({ message: "Wallet found", data: { wallet } });
@@ -63,33 +63,33 @@ async function getWallet(walletAddress: string): Promise<string> {
 };
 
 function writeFile(path: string, data: string): Promise<[boolean, string | null | undefined]> {
-  return new Promise((resolve, reject) => {
-    const _dir = path.split("/").slice(0, -1).join("/");
-    makeDir(_dir)
-    .then((r: boolean) => {
-      fs.writeFile(path, data, (err: NodeJS.ErrnoException | null) => {
-        if (err) reject([ false, err ]);
-        resolve( [true, null ]);
-      });
-    })
-    .catch((e: NodeJS.ErrnoException) => reject([false, e]));
-  });
+    return new Promise((resolve, reject) => {
+        const _dir = path.split("/").slice(0, -1).join("/");
+        makeDir(_dir)
+        .then((r: boolean) => {
+            fs.writeFile(path, data, (err: NodeJS.ErrnoException | null) => {
+                if (err) reject([ false, err ]);
+                resolve( [ true, null ]);
+            });
+        })
+        .catch((e: NodeJS.ErrnoException) => reject([false, e]));
+    });
 };
 
 function readFile(path: string): Promise<[boolean, string, string | undefined]> {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, (err: NodeJS.ErrnoException | null, data: Buffer) => {
-      if (err) reject([ false, "", err ]);
-      resolve( [ true, data.toString(), undefined ]);
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, (err: NodeJS.ErrnoException | null, data: Buffer) => {
+            if (err) reject([ false, "", err ]);
+            resolve( [ true, data.toString(), undefined ]);
+        });
     });
-  });
 };
 
 function makeDir(path: string): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    fs.mkdir(path, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
-      if (err) reject(err);
-      resolve(true);
+    return new Promise((resolve, reject) => {
+        fs.mkdir(path, { recursive: true }, (err: NodeJS.ErrnoException | null) => {
+            if (err) reject(err);
+            resolve(true);
+        });
     });
-  });
 };
