@@ -11,7 +11,7 @@ export async function hCreateWallet(req: Request, res: Response): Promise<void> 
 // Get Wallet handler
 export async function hGetWallet(req: Request, res: Response): Promise<void> {
   const walletAddress = (req.query.id as string);
-  if (!walletAddress) {
+  if (!walletAddress || walletAddress === "") {
       res.json({ message: "Wallet address not provided" });
   }
   const wallet = await getWallet(walletAddress);

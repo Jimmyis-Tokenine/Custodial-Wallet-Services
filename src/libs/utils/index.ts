@@ -1,24 +1,24 @@
 import * as fs from "fs";
 
-export function writeFile(path: string, data: string): Promise<[boolean, string | null | undefined]> {
+export function writeFile(path: string, data: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
       const _dir = path.split("/").slice(0, -1).join("/");
       makeDir(_dir)
       .then((r: boolean) => {
           fs.writeFile(path, data, (err: NodeJS.ErrnoException | null) => {
-              if (err) reject([ false, err ]);
-              resolve( [ true, null ]);
+              if (err) reject(err);
+              resolve(true);
           });
       })
-      .catch((e: NodeJS.ErrnoException) => reject([false, e]));
+      .catch((e: NodeJS.ErrnoException) => reject(e));
   });
 };
 
-export function readFile(path: string): Promise<[boolean, string, string | undefined]> {
+export function readFile(path: string): Promise<string> {
   return new Promise((resolve, reject) => {
       fs.readFile(path, (err: NodeJS.ErrnoException | null, data: Buffer) => {
-          if (err) reject([ false, "", err ]);
-          resolve( [ true, data.toString(), undefined ]);
+          if (err) reject(err);
+          resolve(data?.toString());
       });
   });
 };
